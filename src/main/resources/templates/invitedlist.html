@@ -18,7 +18,7 @@
 							<th>Telephone</th>
 						</tr>
 					</thead>
-					<tr th:each="invited: ${invited}">
+					<tr th:each="invited: ${invitedList}">
 						<td><span th:text="${invited.name}"></span></td>
 						<td><span th:text="${invited.email}"></span></td>
 						<td><span th:text="${invited.telephone}"></span></td>
