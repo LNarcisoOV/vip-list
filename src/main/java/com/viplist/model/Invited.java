@@ -12,7 +12,6 @@ import lombok.Data;
 public class Invited {
 	
 	@Id
-	@GeneratedValue
 	private int id;
 	
 	@Column
