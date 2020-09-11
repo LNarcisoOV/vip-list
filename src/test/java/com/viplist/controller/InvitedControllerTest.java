@@ -1,21 +1,20 @@
 package com.viplist.controller;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.viplist.model.Invited;
+import com.viplist.service.InvitedService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -23,13 +22,21 @@ class InvitedControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
+	
+	@InjectMocks
+	private InvitedController invitedController;
+	
+	@Mock
+	private InvitedService invitedService;
+	
+	@BeforeEach
+	public void init() {
+		MockitoAnnotations.initMocks(this);
+		this.mockMvc = MockMvcBuilders.standaloneSetup(invitedController).build();
+	}
 
 	@Test
 	void shouldGetStatusOKCallingVipList() throws Exception {
-		MvcResult result = this.mockMvc.perform(get("/invitedlist/")).andExpect(status().isOk()).andReturn();
-		List<Invited> invitedResponseList = new ObjectMapper().readValue(result.getResponse().getContentAsString(),
-				new TypeReference<List<Invited>>() {
-				});
-		assertTrue(invitedResponseList != null && !invitedResponseList.isEmpty() && invitedResponseList.size() == 3);
+		this.mockMvc.perform(get("/invitedlist/")).andExpect(status().isOk()).andReturn();
 	}
 }

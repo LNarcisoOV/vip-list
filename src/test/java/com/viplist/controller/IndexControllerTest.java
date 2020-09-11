@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 class IndexControllerTest {
+	
+	private static final String WELCOME_MESSAGE = "Welcome to vip app";
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -26,7 +28,7 @@ class IndexControllerTest {
 			.andReturn()
 			.getResponse()
 			.getContentAsString()
-			.contains("<html>");
+			.contains(WELCOME_MESSAGE);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

@@ -1,4 +1,4 @@
-package com.viplist.repository;
+package com.viplist.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,10 +13,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.viplist.model.Invited;
+import com.viplist.repository.InvitedRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class InvitedRepositoryTest {
+class InvitedServiceTest {
 
 	private static final String DEFAULT_NAME = "Jaco Pastorius";
 
