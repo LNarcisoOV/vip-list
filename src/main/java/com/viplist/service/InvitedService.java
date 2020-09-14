@@ -23,7 +23,7 @@ public class InvitedService {
 	
 	public Invited findById(Integer id) {
 		Optional<Invited> optInv = invitedRepository.findById(id);
-		return optInv.get();
+		return optInv.isPresent() ? optInv.get() : null;
 	}
 
 	public int sendEmail() {
